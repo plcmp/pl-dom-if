@@ -1,0 +1,28 @@
+{
+    "name": "@plcmp/pl-dom-if",
+    "version": "0.1.0",
+    "description": "Components for show/hide template",
+    "main": "pl-dom-if.js",
+    "repository": {
+        "url": "https://github.com/plcmp/pl-repeat.git"
+    },
+    "license": "MIT",
+    "type": "module",
+    "author": {
+        "name": "Dmitry Boikov",
+        "email": "boikovdv@gmail.com"
+    },
+    "contributors": [
+        {
+            "name": "Azat Yamalov",
+            "email": "yamalov.azat@live.com"
+        },
+        {
+            "name": "Andrey Maksimov",
+            "email": "andrmaxmail@gmail.com"
+        }
+    ],
+    "dependencies": {
+        "polylib": "^1.0.0"
+    }
+}
