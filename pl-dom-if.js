@@ -18,10 +18,6 @@ class PlDomIf extends PlElement {
         this._pti = tpl._pti;
         this._hti = tpl._hti;
         this.pctx = tpl._pti?.ctx;
-        /* render if condition already true */
-        if (this.if) {
-            this.render();
-        }
     }
     render() {
         let inst = new TemplateInstance(this.rTpl);
