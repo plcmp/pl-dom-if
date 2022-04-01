@@ -22,16 +22,16 @@ class PlDomIf extends PlElement {
     render() {
         let inst = new TemplateInstance(this.rTpl);
         this._ti = inst;
-        inst.attach(this, this, this._pti);
+        inst.attach(this.pctx, this, this._pti);
     }
     disconnectedCallback() {
         super.disconnectedCallback();
-        this._ti.detach();
+        this._ti?.detach();
     }
     ifObserver(condition) {
         if (condition) {
             this.render();
-        } else {
+        } else if(this._ti){
             this._ti.detach();
             this._ti = undefined;
         }
