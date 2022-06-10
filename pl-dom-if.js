@@ -1,4 +1,4 @@
-import { PlElement, TemplateInstance, createContext } from "polylib";
+import { PlElement, TemplateInstance } from "polylib";
 
 class PlDomIf extends PlElement {
     static get properties() {
@@ -11,18 +11,12 @@ class PlDomIf extends PlElement {
     }
     connectedCallback() {
         super.connectedCallback();
-        this.style.display = 'none';
-        let tpl = this.querySelector('template');
-        this.rTpl = tpl.tpl;
-        this.oTpl = tpl;
-        this._pti = tpl._pti;
-        this._hti = tpl._hti;
-        this.pctx = tpl._pti?.ctx;
+        this.sTpl = [...this.childNodes].find( n => n.nodeType === document.COMMENT_NODE && n.textContent.startsWith('tpl:'))?._tpl;
     }
     render() {
-        let inst = new TemplateInstance(this.rTpl);
-        this._ti = inst;
-        inst.attach(this.pctx, this, this._pti);
+        let ti = new TemplateInstance(this.sTpl);
+        ti.attach(null, this, [this,...this.sTpl._hctx]);
+        this._ti = ti;
     }
     disconnectedCallback() {
         super.disconnectedCallback();
