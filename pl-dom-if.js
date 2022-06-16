@@ -16,8 +16,8 @@ class PlDomIf extends PlElement {
     }
     render() {
         let ti = new TemplateInstance(this.sTpl);
-        ti.attach(null, this, [this,...this.sTpl._hctx]);
         this._ti = ti;
+        ti.attach(null, this, [this,...this.sTpl._hctx]);
     }
     disconnectedCallback() {
         super.disconnectedCallback();
