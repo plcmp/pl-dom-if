@@ -1,9 +1,9 @@
-import { PlElement, TemplateInstance, createContext } from "polylib";
+import { PlElement, TemplateInstance } from "polylib";
 
 class PlDomIf extends PlElement {
     static get properties() {
         return {
-            if: { observer: 'ifObserver' }
+            if: { type: Boolean, observer: 'ifObserver' }
         }
     }
     constructor() {
@@ -11,18 +11,13 @@ class PlDomIf extends PlElement {
     }
     connectedCallback() {
         super.connectedCallback();
-        this.style.display = 'none';
-        let tpl = this.querySelector('template');
-        this.rTpl = tpl.tpl;
-        this.oTpl = tpl;
-        this._pti = tpl._pti;
-        this._hti = tpl._hti;
-        this.pctx = tpl._pti?.ctx;
+        this.sTpl = [...this.childNodes].find( n => n.nodeType === document.COMMENT_NODE && n.textContent.startsWith('tpl:'))?._tpl;
+        if (this.if) this.render();
     }
     render() {
-        let inst = new TemplateInstance(this.rTpl);
-        this._ti = inst;
-        inst.attach(this.pctx, this, this._pti);
+        let ti = new TemplateInstance(this.sTpl);
+        this._ti = ti;
+        ti.attach(null, this, [this,...this.sTpl._hctx]);
     }
     disconnectedCallback() {
         super.disconnectedCallback();
@@ -30,7 +25,7 @@ class PlDomIf extends PlElement {
     }
     ifObserver(condition) {
         if (condition) {
-            this.render();
+            if (!this._ti) this.render();
         } else if(this._ti){
             this._ti.detach();
             this._ti = undefined;
