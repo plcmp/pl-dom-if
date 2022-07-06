@@ -11,13 +11,15 @@ class PlDomIf extends PlElement {
     }
     connectedCallback() {
         super.connectedCallback();
-        this.sTpl = [...this.childNodes].find( n => n.nodeType === document.COMMENT_NODE && n.textContent.startsWith('tpl:'))?._tpl;
+        let tplEl = [...this.childNodes].find( n => n.nodeType === document.COMMENT_NODE && n.textContent.startsWith('tpl:'));
+        this.sTpl = tplEl?._tpl;
+        this._hctx = tplEl?._hctx;
         if (this.if) this.render();
     }
     render() {
         let ti = new TemplateInstance(this.sTpl);
         this._ti = ti;
-        ti.attach(null, this, [this,...this.sTpl._hctx]);
+        ti.attach(null, this, [this,...this._hctx]);
     }
     disconnectedCallback() {
         super.disconnectedCallback();
