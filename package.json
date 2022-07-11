@@ -1,6 +1,6 @@
 {
     "name": "@plcmp/pl-dom-if",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Components for show/hide template",
     "main": "pl-dom-if.js",
     "repository": {
@@ -23,6 +23,6 @@
         }
     ],
     "dependencies": {
-        "polylib": "^1.1.0"
+        "polylib": "^1.1.2"
     }
 }
