@@ -1,6 +1,6 @@
 {
     "name": "@plcmp/pl-dom-if",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Components for show/hide template",
     "main": "pl-dom-if.js",
     "repository": {
