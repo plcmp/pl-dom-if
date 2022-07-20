@@ -14,6 +14,7 @@ class PlDomIf extends PlElement {
         let tplEl = [...this.childNodes].find( n => n.nodeType === document.COMMENT_NODE && n.textContent.startsWith('tpl:'));
         this.sTpl = tplEl?._tpl;
         this._hctx = tplEl?._hctx;
+        this.style.display = 'none';
         if (this.if) this.render();
     }
     render() {
