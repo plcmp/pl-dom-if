@@ -3,7 +3,8 @@ import { PlElement, TemplateInstance } from "polylib";
 class PlDomIf extends PlElement {
     static get properties() {
         return {
-            if: { type: Boolean, observer: 'ifObserver' }
+            if: { type: Boolean, observer: 'ifObserver' },
+            restamp: { type: Boolean }
         }
     }
     constructor() {
@@ -29,7 +30,7 @@ class PlDomIf extends PlElement {
     ifObserver(condition) {
         if (condition) {
             if (!this._ti) this.render();
-        } else if(this._ti){
+        } else if(this._ti && this.restamp){
             this._ti.detach();
             this._ti = undefined;
         }
